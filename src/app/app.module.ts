@@ -13,7 +13,7 @@ import { DashboardModule } from './features/dashboard/dashboard.module';
   imports: [
     BrowserModule,
     AppRoutingModule, 
-    DashboardModule
+    DashboardModule,
   ],
   providers: [
     provideAnimationsAsync()
