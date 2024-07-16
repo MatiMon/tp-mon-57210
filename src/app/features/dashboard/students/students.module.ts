@@ -12,6 +12,7 @@ import { StudentsDialogComponent } from './components/students-dialog/students-d
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import { FullNamePipe } from './components/full-name.pipe';
+import { SharedModule } from '../../../shared/shared.module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { FullNamePipe } from './components/full-name.pipe';
     MatButtonModule, 
     MatIconModule, 
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    SharedModule
   ],
   exports: [
     StudentsComponent
