@@ -11,7 +11,7 @@ import { IStudent } from './student.model';
 export class StudentsComponent {
 
   studentsList : IStudent[] = [{id: 1, name:'Matias', lastname:'Mon', course:'123'}]// [];
-  displayedColumns: string[] = ['id', 'name', 'lastname', 'course', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'course', 'actions'];
   lastId = 1;
 
   constructor(private matDialog: MatDialog) {}

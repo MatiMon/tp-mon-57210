@@ -11,12 +11,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { StudentsDialogComponent } from './components/students-dialog/students-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
+import { FullNamePipe } from './components/full-name.pipe';
 
 
 @NgModule({
   declarations: [
     StudentsComponent,
-    StudentsDialogComponent
+    StudentsDialogComponent,
+    FullNamePipe
   ],
   imports: [
     CommonModule,
