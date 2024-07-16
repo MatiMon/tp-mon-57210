@@ -14,7 +14,7 @@ export class StudentsDialogComponent {
 
   constructor(private fb : FormBuilder, 
     private matDialogRef: MatDialogRef<StudentsDialogComponent>, 
-    @Inject(MAT_DIALOG_DATA) public editingStudent?: IStudent
+    @Inject(MAT_DIALOG_DATA) public editingStudent: IStudent
   ) {
     this.studentForm = fb.group({
       name: [null, Validators.required],
@@ -29,7 +29,11 @@ export class StudentsDialogComponent {
 
   onSubmit() {
     if (this.studentForm.valid) {
-      this.matDialogRef.close(this.studentForm.value);
+      this.matDialogRef.close(
+        this.editingStudent?
+        {...this.studentForm.value, id: this.editingStudent.id}:
+        {...this.studentForm.value}
+      );
     } else {
       //TODO error
     }

@@ -20,7 +20,8 @@ export class StudentsComponent {
     this.matDialog.open(StudentsDialogComponent).afterClosed().subscribe({
       next: (value) => {
         if(value) {
-          value.id = this.lastId +1;
+          this.lastId += 1;
+          value.id = this.lastId;
           this.studentsList = [...this.studentsList, value];
         }
       }
@@ -41,7 +42,8 @@ export class StudentsComponent {
       .subscribe({
         next: (value) => {
           if (!!value) {
-            this.studentsList = this.studentsList.map((student) => student.id === student.id ? {...value, id: student.id} : student)
+            this.studentsList = this.studentsList.map(
+              (st) => st.id === value.id ? value : st)
           }
         },
       });
