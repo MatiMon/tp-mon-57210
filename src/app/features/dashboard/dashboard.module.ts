@@ -9,6 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { StudentsModule } from './students/students.module';
+import { CoursesModule } from './courses/courses.module';
+import { EnrollmentsModule } from './enrollments/enrollments.module';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { StudentsModule } from './students/students.module';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    StudentsModule
+    StudentsModule,
+    CoursesModule,
+    EnrollmentsModule,
+    HomeModule
   ],
   exports: [
     DashboardComponent

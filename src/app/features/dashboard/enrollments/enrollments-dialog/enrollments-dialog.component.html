@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>
+    {{ editingEnrollment ? "Editando inscripcion" : "Nueva inscripcion" }}
+</h2>
+<mat-dialog-content>
+    <form [formGroup]="enrollmentForm">
+        <mat-form-field class="w-full">
+            <mat-label>Id alumno</mat-label>
+            <input formControlName="studentId" matInput>
+            <mat-error>Debe ingresar un id de estudiante</mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-full">
+            <mat-label>Id curso</mat-label>
+            <input formControlName="courseId" matInput>
+            <mat-error>Debe ingresar un id de curso</mat-error>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-dialog-close mat-button >Cancelar</button> 
+    <button (click)="onSubmit()" mat-button >Guardar</button>
+</mat-dialog-actions>
