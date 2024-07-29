@@ -3,10 +3,43 @@
 <mat-drawer [opened]="true" #drawer class="example-sidenav" mode="side">
   <mat-nav-list>
     <!-- <mat-icon>person</mat-icon> -->
-    <a mat-list-item href="...">Inicio</a>
-    <!-- <a mat-list-item href="...">Cursos</a> -->
+    <!-- <a mat-list-item href="...">Inicio</a>
+    <a mat-list-item href="...">Cursos</a>
     <a mat-list-item href="...">Alumnos</a>
-    <!-- <a mat-list-item href="...">Inscripciones</a> -->
+    <a mat-list-item href="...">Inscripciones</a> -->
+    <a
+        mat-list-item
+        routerLink="home"
+        routerLinkActive
+        #homeLink="routerLinkActive"
+        [activated]="homeLink.isActive"
+        >Inicio</a
+      >
+      <a
+        mat-list-item
+        routerLink="students"
+        routerLinkActive
+        #studentsLink="routerLinkActive"
+        [activated]="studentsLink.isActive"
+        >Alumnos</a
+      >
+      <a
+        mat-list-item
+        routerLink="courses"
+        routerLinkActive
+        #coursesLink="routerLinkActive"
+        [activated]="coursesLink.isActive"
+        >Cursos</a
+      >
+      <a mat-list-item>Alumnos</a>
+      <a
+        mat-list-item
+        routerLink="enrollments"
+        routerLinkActive
+        #inscripcionesLink="routerLinkActive"
+        [activated]="inscripcionesLink.isActive"
+        >Inscripciones</a
+      >
   </mat-nav-list>
 </mat-drawer>
 <!-- SIDEBAR FIN -->
@@ -26,24 +59,11 @@
     </button>
     <span>Trabajo Practico 1 - Coderhouse</span>
     <span class="example-spacer"></span>
-    <button
-      mat-icon-button
-      class="example-icon favorite-icon"
-      aria-label="Example icon-button with heart icon"
-    >
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      class="example-icon"
-      aria-label="Example icon-button with share icon"
-    >
-      <mat-icon>share</mat-icon>
-    </button>
   </mat-toolbar>
   <!-- TOOLBAR FIN -->
 
-  <app-students></app-students>
+
+  <!-- <app-students></app-students> -->
 
 </div>
 <!-- MAIN CONTENT FIN-->

@@ -12,7 +12,7 @@ import { StudentsModule } from './students/students.module';
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
