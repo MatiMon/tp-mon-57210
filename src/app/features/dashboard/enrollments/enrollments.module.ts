@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CoursesRoutingModule } from './courses-routing.module';
-import { CoursesComponent } from './courses.component';
-import { CoursesDialogComponent } from './courses-dialog/courses-dialog/courses-dialog.component';
+import { EnrollmentsRoutingModule } from './enrollments-routing.module';
+import { EnrollmentsComponent } from './enrollments.component';
+import { EnrollmentsDialogComponent } from './enrollments-dialog/enrollments-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -12,17 +12,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '../../../shared/shared.module';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
-  declarations: [
-    CoursesComponent,
-    CoursesDialogComponent
-  ],
+  declarations: [EnrollmentsComponent, EnrollmentsDialogComponent],
   imports: [
     CommonModule,
-    CoursesRoutingModule,
+    EnrollmentsRoutingModule,
     MatFormFieldModule, 
     MatInputModule,
     MatDialogModule,
@@ -30,11 +26,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatIconModule, 
     ReactiveFormsModule,
     MatTableModule,
-    SharedModule,
-    MatDatepickerModule
+    SharedModule
   ],
   exports: [
-    CoursesComponent
+    EnrollmentsComponent
   ]
 })
-export class CoursesModule { }
+export class EnrollmentsModule { }
