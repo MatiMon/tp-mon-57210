@@ -25,9 +25,9 @@ import { HomeModule } from './home/home.module';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    StudentsModule,
-    CoursesModule,
-    EnrollmentsModule,
+    //StudentsModule,
+    //CoursesModule,
+    //EnrollmentsModule,
     HomeModule
   ],
   exports: [
