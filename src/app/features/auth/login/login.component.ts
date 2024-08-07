@@ -31,6 +31,7 @@ export class LoginComponent {
       const data = {
         email: this.loginForm.get('email')?.value,
         password: this.loginForm.get('password')?.value,
+        role: this.loginForm.get('role')?.value
       };
       this.authService.login(data);
     }

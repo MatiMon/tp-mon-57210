@@ -20,14 +20,8 @@ export class AuthService {
 
   constructor(private router: Router) {}
 
-  login(data: { email: string; password: string }) {
+  login(data: { email: string; password: string ; role: string}) {
     localStorage.setItem('token', this.VALID_TOKEN);
-
-    // this._authUser.next({
-    //   id: 123,
-    //   username: 'admin',
-    //   role: Role.ADMIN
-    // })
     this.router.navigate(['dashboard', 'courses'])
   }
 
