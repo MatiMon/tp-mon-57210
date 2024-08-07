@@ -4,6 +4,7 @@ import { StudentsDialogComponent } from './components/students-dialog/students-d
 import { IStudent } from './student.model';
 import { StudentsService } from '../../../core/services/students.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-students',
@@ -12,9 +13,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class StudentsComponent {
 
-  studentsList : IStudent[] = []; // [{id: 1, name:'Matias', lastname:'Mon', course:'123'}]// [];
+  studentsList : IStudent[] = [];
   displayedColumns: string[] = ['id', 'name', 'course', 'actions'];
-  lastId = 1;
 
   constructor(private matDialog: MatDialog, private service: StudentsService) {}
 
@@ -45,18 +45,21 @@ export class StudentsComponent {
     this.matDialog.open(StudentsDialogComponent).afterClosed().subscribe({
       next: (value) => {
         if(value) {
-          this.lastId += 1;
-          value.id = this.lastId;
-          this.studentsList = [...this.studentsList, value];
+          value.id = this.getRandomId()
+          this.service.create(value)
+          .pipe(tap(() => this.loadData()))
+          .subscribe();
         }
       }
     });
 
   }
 
-  deleteById(id : number) {
+  deleteById(id : string) {
     if(confirm('¿Esta seguro que desea eliminar?')) {
-      this.studentsList = this.studentsList.filter((student) => student.id != id)
+      this.service.deleteById(id)
+      .pipe(tap(() => this.loadData()))
+      .subscribe();
     }
   }
 
@@ -76,6 +79,6 @@ export class StudentsComponent {
 
   getRandomId(): string {
     return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-}
+  }
 
 }

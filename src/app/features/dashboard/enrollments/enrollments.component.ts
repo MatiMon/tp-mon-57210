@@ -4,6 +4,7 @@ import { EnrollmentsDialogComponent } from './enrollments-dialog/enrollments-dia
 import { MatDialog } from '@angular/material/dialog';
 import { EnrollmentsService } from '../../../core/services/enrollments.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-enrollments',
@@ -12,9 +13,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class EnrollmentsComponent {
 
-  enrollmentsList : IEnrollment[] = []; // [{id: 1, studentId: '1', courseId: '1'}]
+  enrollmentsList : IEnrollment[] = [];
   displayedColumns: string[] = ['id', 'studentId', 'courseId', 'actions'];
-  lastId = 1;
 
   constructor(private matDialog: MatDialog, private service: EnrollmentsService) {}
 
@@ -45,18 +45,22 @@ export class EnrollmentsComponent {
     this.matDialog.open(EnrollmentsDialogComponent).afterClosed().subscribe({
       next: (value) => {
         if(value) {
-          this.lastId += 1;
-          value.id = this.lastId;
-          this.enrollmentsList = [...this.enrollmentsList, value];
+          value.id = this.getRandomId()
+          console.log(value)
+          this.service.create(value)
+          .pipe(tap(() => this.loadData()))
+          .subscribe();
         }
       }
     });
 
   }
 
-  deleteById(id : number) {
+  deleteById(id : string) {
     if(confirm('¿Esta seguro que desea eliminar?')) {
-      this.enrollmentsList = this.enrollmentsList.filter((e) => e.id != id)
+      this.service.deleteById(id)
+      .pipe(tap(() => this.loadData()))
+      .subscribe();
     }
   }
 
@@ -76,6 +80,6 @@ export class EnrollmentsComponent {
 
   getRandomId(): string {
     return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-}
+  }
 
 }

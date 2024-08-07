@@ -14,7 +14,7 @@ export class AuthService {
   authUser = this._authUser.asObservable();
 
   private FAKE_USER = {
-    id: 123,
+    id: '123',
     username: 'admin',
     role: Role.ADMIN
   }

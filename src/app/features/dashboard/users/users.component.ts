@@ -4,6 +4,7 @@ import { UsersDialogComponent } from './users-dialog/users-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UsersService } from '../../../core/services/users.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -11,8 +12,8 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './users.component.css'
 })
 export class UsersComponent {
-  usersList : IUser[] = []; //[{id: 1, username:'superusuario', role: Role.ADMIN}]// [];
-  displayedColumns: string[] = ['id', 'username', 'role'];
+  usersList : IUser[] = [];
+  displayedColumns: string[] = ['id', 'username', 'role', 'actions'];
   lastId = 1;
 
   constructor(private matDialog: MatDialog, private service: UsersService) {}
@@ -45,18 +46,21 @@ export class UsersComponent {
     this.matDialog.open(UsersDialogComponent).afterClosed().subscribe({
       next: (value) => {
         if(value) {
-          this.lastId += 1;
-          value.id = this.lastId;
-          this.usersList = [...this.usersList, value];
+          value.id = this.getRandomId()
+          this.service.create(value)
+          .pipe(tap(() => this.loadData()))
+          .subscribe();
         }
       }
     });
 
   }
 
-  deleteById(id : number) {
+  deleteById(id : string) {
     if(confirm('¿Esta seguro que desea eliminar?')) {
-      this.usersList = this.usersList.filter((u) => u.id != id)
+      this.service.deleteById(id)
+      .pipe(tap(() => this.loadData()))
+      .subscribe();
     }
   }
 
@@ -72,6 +76,10 @@ export class UsersComponent {
           }
         },
       });
+  }
+
+  getRandomId(): string {
+    return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
   }
 
 }

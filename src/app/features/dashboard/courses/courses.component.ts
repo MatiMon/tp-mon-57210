@@ -5,6 +5,7 @@ import { CoursesDialogComponent } from './courses-dialog/courses-dialog/courses-
 import { ICourse } from './course.model';
 import { CoursesService } from '../../../core/services/courses.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -15,7 +16,6 @@ export class CoursesComponent {
 
   coursesList : ICourse[] = [];// [{id: 1, name:'Angular 1', startDate: new Date, endDate: new Date(new Date().setDate(new Date().getDate() + 60))}]
   displayedColumns: string[] = ['id', 'name', 'startDate', 'endDate', 'actions'];
-  lastId = 1;
 
   constructor(private matDialog: MatDialog, private service: CoursesService) {}
 
@@ -46,18 +46,21 @@ export class CoursesComponent {
     this.matDialog.open(CoursesDialogComponent).afterClosed().subscribe({
       next: (value) => {
         if(value) {
-          this.lastId += 1;
-          value.id = this.lastId;
-          this.coursesList = [...this.coursesList, value];
+          value.id = this.getRandomId()
+          this.service.create(value)
+          .pipe(tap(() => this.loadData()))
+          .subscribe();
         }
       }
     });
-
   }
+  
 
-  deleteById(id : number) {
+  deleteById(id : string) {
     if(confirm('¿Esta seguro que desea eliminar?')) {
-      this.coursesList = this.coursesList.filter((c) => c.id != id)
+      this.service.deleteById(id)
+      .pipe(tap(() => this.loadData()))
+      .subscribe();
     }
   }
 
@@ -77,6 +80,6 @@ export class CoursesComponent {
 
   getRandomId(): string {
     return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-}
+  }
 
 }
