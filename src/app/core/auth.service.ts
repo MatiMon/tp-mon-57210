@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { IUser, Role } from '../features/dashboard/users/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,25 @@ import { Observable, of } from 'rxjs';
 export class AuthService {
   private VALID_TOKEN = 'lksfdjglfdkgjklfdkjgldfjisdhfjsdfsdk';
 
-  constructor(private router: Router) { }
+  private _authUser = new BehaviorSubject<IUser | null>(null);
+  authUser = this._authUser.asObservable();
+
+  private FAKE_USER = {
+    id: 123,
+    username: 'admin',
+    role: Role.ADMIN
+  }
+
+  constructor(private router: Router) {}
 
   login(data: { email: string; password: string }) {
     localStorage.setItem('token', this.VALID_TOKEN);
+
+    // this._authUser.next({
+    //   id: 123,
+    //   username: 'admin',
+    //   role: Role.ADMIN
+    // })
     this.router.navigate(['dashboard', 'courses'])
   }
 
@@ -22,6 +38,11 @@ export class AuthService {
 
   verifyToken(): Observable<boolean> {
     const token = localStorage.getItem('token')
-    return of(this.VALID_TOKEN === token);
+    const isValid = this.VALID_TOKEN === token;
+    
+    if(isValid) {
+      this._authUser.next(this.FAKE_USER)
+    }
+    return of(isValid);
   }
 }

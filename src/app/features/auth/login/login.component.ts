@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/auth.service';
+import { Role } from '../../dashboard/users/user.model';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,7 @@ import { AuthService } from '../../../core/auth.service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  roles = Object.values(Role);
 
   constructor(
     public authService: AuthService,
@@ -18,6 +20,7 @@ export class LoginComponent {
     this.loginForm = this.fb.group({
       email: ['test@mail.com', [Validators.required, Validators.email]],
       password: ['123456', [Validators.required]],
+      role: [null, Validators.required]
     });
   }
 
