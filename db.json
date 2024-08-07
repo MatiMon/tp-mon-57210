@@ -1,0 +1,80 @@
+{
+    "users": [
+      {
+        "id": "13j9",
+        "username": "admin",
+        "token": "jfsdk43dsakdjasb4Dsdsa$@#fS",
+        "role": "ADMIN"
+      },
+      {
+        "id": "23j9",
+        "username": "user01",
+        "token": "jfsdk43bghkr3db4Dsdsa$d@#S",
+        "role": "USER"
+      },
+      {
+        "id": "33j9",
+        "username": "user02",
+        "token": "jfsdk43bghkr3db4Dsdsa$d@#S",
+        "role": "USER"
+      }
+    ],
+    "courses": [
+      {
+        "id": "43j9",
+        "name": "Javascript Avanzado",
+        "startDate": "2024-08-07T10:30:00",
+        "endDate": "2024-10-07T10:30:00"
+      },
+      {
+        "id": "53j9",
+        "name": "Angular",
+        "startDate": "2024-08-07T10:30:00",
+        "endDate": "2024-10-07T10:30:00"
+      },
+      {
+        "id": "63j9",
+        "name": "Java",
+        "startDate": "2024-08-07T10:30:00",
+        "endDate": "2024-10-07T10:30:00"
+      }
+    ],
+    "students": [
+      {
+        "id": "73j9",
+        "name": "Matias",
+        "lastName": "Mon",
+        "course": "Angular"
+      },
+      {
+        "id": "83j9",
+        "name": "Jorge",
+        "lastName": "Jorgelin",
+        "course": "Angular"
+      },
+      {
+        "id": "93j9",
+        "name": "Diego",
+        "lastName": "Diegote",
+        "course": "Angular"
+      }
+    ],
+    "enrollments": [
+      {
+        "id": "10j9",
+        "studentId": "73j9",
+        "courseId": "53j9"
+      },
+      {
+        "id": "11j9",
+        "studentId": "83j9",
+        "courseId": "53j9"
+      },
+      {
+        "id": "12j9",
+        "studentId": "93j9",
+        "courseId": "53j9"
+      }
+    ]
+  }
+  

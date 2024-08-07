@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { IUser, Role } from '../features/dashboard/users/user.model';
+import { IUser, Role } from '../../features/dashboard/users/user.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AuthService {
     role: Role.ADMIN
   }
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private httpClient: HttpClient) {}
 
   login(data: { email: string; password: string ; role: string}) {
     localStorage.setItem('token', this.VALID_TOKEN);
