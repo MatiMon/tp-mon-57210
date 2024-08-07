@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentsDialogComponent } from './components/students-dialog/students-dialog.component';
 import { IStudent } from './student.model';
+import { StudentsService } from '../../../core/services/students.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-students',
@@ -10,11 +12,34 @@ import { IStudent } from './student.model';
 })
 export class StudentsComponent {
 
-  studentsList : IStudent[] = [{id: 1, name:'Matias', lastname:'Mon', course:'123'}]// [];
+  studentsList : IStudent[] = []; // [{id: 1, name:'Matias', lastname:'Mon', course:'123'}]// [];
   displayedColumns: string[] = ['id', 'name', 'course', 'actions'];
   lastId = 1;
 
-  constructor(private matDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog, private service: StudentsService) {}
+
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData() {
+    // this.loading = false;
+    this.service.getAll().subscribe({
+      next: (dataFromDB) => {
+        this.studentsList = dataFromDB;
+      },
+      error: (error) => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === 404) {
+            alert('Estudiantes no encontrados');
+          }
+        }
+      },
+      complete: () => {
+        // this.loading = false;
+      },
+    });
+  }
 
   openDialog(): void {
     this.matDialog.open(StudentsDialogComponent).afterClosed().subscribe({

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IUser, Role } from './user.model';
 import { UsersDialogComponent } from './users-dialog/users-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UsersService } from '../../../core/services/users.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-users',
@@ -9,11 +11,34 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './users.component.css'
 })
 export class UsersComponent {
-  usersList : IUser[] = [{id: 1, username:'superusuario', role: Role.ADMIN}]// [];
+  usersList : IUser[] = []; //[{id: 1, username:'superusuario', role: Role.ADMIN}]// [];
   displayedColumns: string[] = ['id', 'username', 'role'];
   lastId = 1;
 
-  constructor(private matDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog, private service: UsersService) {}
+
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData() {
+    // this.loading = false;
+    this.service.getAll().subscribe({
+      next: (dataFromDB) => {
+        this.usersList = dataFromDB;
+      },
+      error: (error) => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === 404) {
+            alert('Usuarios no encontrados');
+          }
+        }
+      },
+      complete: () => {
+        // this.loading = false;
+      },
+    });
+  }
 
 
   openDialog(): void {

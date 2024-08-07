@@ -11,7 +11,7 @@ export class EnrollmentsService {
   constructor(private httpClient: HttpClient) {}
 
   getAll(): Observable<IEnrollment[]> {
-    return this.httpClient.get<IEnrollment[]>('http://localhost:3000/enrollment');
+    return this.httpClient.get<IEnrollment[]>('http://localhost:3000/enrollments');
   }
 
   create(enrollment: IEnrollment) {

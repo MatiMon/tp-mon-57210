@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IEnrollment } from './enrollment.model';
 import { EnrollmentsDialogComponent } from './enrollments-dialog/enrollments-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { EnrollmentsService } from '../../../core/services/enrollments.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-enrollments',
@@ -10,11 +12,34 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class EnrollmentsComponent {
 
-  enrollmentsList : IEnrollment[] = [{id: 1, studentId: '1', courseId: '1'}]
+  enrollmentsList : IEnrollment[] = []; // [{id: 1, studentId: '1', courseId: '1'}]
   displayedColumns: string[] = ['id', 'studentId', 'courseId', 'actions'];
   lastId = 1;
 
-  constructor(private matDialog: MatDialog) {}
+  constructor(private matDialog: MatDialog, private service: EnrollmentsService) {}
+
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData() {
+    // this.loading = false;
+    this.service.getAll().subscribe({
+      next: (dataFromDB) => {
+        this.enrollmentsList = dataFromDB;
+      },
+      error: (error) => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.status === 404) {
+            alert('Inscripciones no encontradas');
+          }
+        }
+      },
+      complete: () => {
+        // this.loading = false;
+      },
+    });
+  }
 
   openDialog(): void {
     this.matDialog.open(EnrollmentsDialogComponent).afterClosed().subscribe({
