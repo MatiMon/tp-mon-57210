@@ -34,6 +34,17 @@
         [activated]="enrollmentsLink.isActive"
         >Inscripciones</a
       >
+      <a
+        *ngIf="(authUser | async)?.role === 'ADMIN'"
+        mat-list-item
+        routerLink="users"
+        routerLinkActive
+        #usersLink="routerLinkActive"
+        [activated]="usersLink.isActive"
+        >Usuarios</a
+      >
+
+      <a (click)="logout()" mat-list-item>Cerrar sesion</a>
   </mat-nav-list>
 </mat-drawer>
 <!-- SIDEBAR FIN -->
@@ -58,9 +69,6 @@
 
 
   <router-outlet/>
-  <!-- <app-students></app-students>
-  <app-courses></app-courses>
-  <app-enrollments></app-enrollments> -->
 
 </div>
 <!-- MAIN CONTENT FIN-->
