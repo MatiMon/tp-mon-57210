@@ -54,16 +54,23 @@
 
   <!-- TOOLBAR INICIO -->
   <mat-toolbar color="primary">
-    <button
-      (click)="drawer.toggle()"
-      mat-icon-button
-      class="example-icon"
-      aria-label="Example icon-button with menu icon"
-    >
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>Trabajo Practico 1 - Coderhouse</span>
-    <span class="example-spacer"></span>
+    <div class="flex justify-content-between w-full align-items-center">
+        <button
+        (click)="drawer.toggle()"
+        mat-icon-button
+        class="example-icon"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Trabajo Practico Final - Coderhouse</span>
+      
+      @if (authUser | async; as user) {  
+        <div>
+          {{ user.username }}
+        </div>
+      }
+    </div>
   </mat-toolbar>
   <!-- TOOLBAR FIN -->
 

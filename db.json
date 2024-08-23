@@ -4,18 +4,24 @@
         "id": "13j9",
         "username": "admin",
         "token": "jfsdk43dsakdjasb4Dsdsa$@#fS",
+        "email": "admin@gmail.com",
+        "password": "admin",
         "role": "ADMIN"
       },
       {
         "id": "23j9",
         "username": "user01",
-        "token": "jfsdk43bghkr3db4Dsdsa$d@#S",
+        "token": "jfsdk43bghkr3db4Dsdsa$d@#G",
+        "email": "user1@gmail.com",
+        "password": "user123",
         "role": "USER"
       },
       {
         "id": "33j9",
         "username": "user02",
-        "token": "jfsdk43bghkr3db4Dsdsa$d@#S",
+        "token": "jfsdk43bghkr3db4Dsdsa$d@#H",
+        "email": "user2@gmail.com",
+        "password": "user123",
         "role": "USER"
       }
     ],

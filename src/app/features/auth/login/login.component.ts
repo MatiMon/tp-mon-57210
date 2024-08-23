@@ -20,7 +20,7 @@ export class LoginComponent {
     this.loginForm = this.fb.group({
       email: ['test@mail.com', [Validators.required, Validators.email]],
       password: ['123456', [Validators.required]],
-      role: [null, Validators.required]
+      // role: [null, Validators.required]
     });
   }
 
